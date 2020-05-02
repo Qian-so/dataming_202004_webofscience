@@ -33,6 +33,7 @@ newdata <- data[which(data$quantity >"30"&data$year<"2020"),]
 ##统计词频，制作词云
 install.packages("wordcloud2")
 library("wordcloud2")
+library("jiebaR")
 mydata<-readLines(con <- file("C:/Users/lenovo/Desktop/2020head.txt",encoding="GB2312"))
 engine_new_word<-worker()
 ##制作用户字典
@@ -50,6 +51,7 @@ txt3<-txt3[!grepl('[0-9]+',names(txt3))]
 result<-txt3[order(txt3, decreasing = TRUE)]
 front <-result[1:100]
 front##查看排在前面部分的词频
+
 ##绘制词云
 wordcloud2(front,color=c(rep(rev(brewer.pal(9, "Blues"))[1:6],each=3),rep("skyblue",40)),
   shape='cardioid',size=0.4,minSize = 0, gridSize =  0,fontFamily = 'Segoe UI', fontWeight = 'bold',
