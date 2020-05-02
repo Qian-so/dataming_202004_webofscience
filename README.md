@@ -33,6 +33,7 @@ newdata <- data[which(data$quantity >"30"&data$year<"2020"),]
 ##统计词频，制作词云
 install.packages("wordcloud2")
 library("wordcloud2")
+library("jiebaR")
 mydata<-readLines(con <- file("C:/Users/lenovo/Desktop/2020head.txt",encoding="GB2312"))
 engine_new_word<-worker()
 ##制作用户字典
