@@ -2,6 +2,8 @@
 
 The development of the issues that people study in nearly five years in the area of IOT on web of science.
 
+代码以其中两年的操作为例，其余修改年份即可
+
 ## 导入数据及简单探索
 
 ```R
@@ -53,4 +55,32 @@ wordcloud2(front,color=c(rep(rev(brewer.pal(9, "Blues"))[1:6],each=3),rep("skybl
   shape='cardioid',size=0.4,minSize = 0, gridSize =  0,fontFamily = 'Segoe UI', fontWeight = 'bold',
   backgroundColor = "white",minRotation = -pi/4, maxRotation = pi/4, shuffle = TRUE,
   rotateRatio = 0.6, ellipticity = 0.65)
+```
+
+## 文本相似度
+
+### 余弦相似度
+
+```R
+# 对2020年和2019年词语求并集
+set <- union(txt2,txt2019)
+# 分别计算词频
+listAcode <- rep(0,length(set))
+freqA <- freq(txt2)
+for(i in 1:length(set)) {
+  for(j in 1:length(freqA$char)) {
+    if(set[i]==freqA$char[j]) listAcode[i] = freqA$freq[j]
+  }
+}
+listBcode <- rep(0,length(set))
+freqB <- freq(txt2019)
+for(i in 1:length(set)) {
+  for(j in 1:length(freqB$char)) {
+    if(set[i]==freqB$char[j]) listBcode[i] = freqB$freq[j]
+  }
+}
+cosθ <- sum(listAcode * listBcode) / (sqrt(sum(listAcode ^ 2)) * sqrt(sum(listBcode ^ 2)));
+cosθ
+# 同样对其他各个年份两两计算余弦相似度
+
 ```
